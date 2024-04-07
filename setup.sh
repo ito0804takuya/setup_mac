@@ -13,7 +13,8 @@ elif [ "$(uname)" == 'Darwin' ] && [ "$(uname -m)" == 'arm64' ]; then
   echo '- arm64 Mac'
   echo '-----\nDownload arm64_mac_setup.sh'
   # zsh -c "$(curl -H 'Cache-Control: no-cache' -sfSL https://raw.githubusercontent.com/shinyaoguri/setup/main/arm64_mac_setup.sh)"
-  zsh arm64_mac_setup.sh
+  # zsh arm64_mac_setup.sh
+  zsh -c "$(curl -H 'Cache-Control: no-cache' -sfSL https://raw.githubusercontent.com/ito0804takuya/setup_mac/main/arm64_mac_setup.sh)"
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   OS='Linux'
   echo '- Linux'
