@@ -30,6 +30,8 @@
       - name: honto
       # マルチディスプレイ
       - name: displaylink
+      # 日本語入力
+      - name: google-japanese-ime
     apps:
       - { name: "LINE", id: "539883307"}
       # focus to doは後で入れること
