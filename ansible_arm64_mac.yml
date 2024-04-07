@@ -102,7 +102,7 @@
         # 拡大時のサイズ
         - { key: largesize, type: integer, value: 64 }
         # 通常時のサイズ
-        - { key: tilesize, type: integer, value: 32 }
+        - { key: tilesize, type: float, value: 32 }
 
   handlers:
     - name: restart_dock
