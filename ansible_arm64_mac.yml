@@ -1,0 +1,87 @@
+###
+- hosts: localhost
+  connection: local
+  vars:
+    homebrew_taps:
+      - homebrew/cask
+      - homebrew/cask-fonts
+    homebrew_packages:
+      - name: git
+      - name: anyenev
+    homebrew_cask_package:
+      # ブラウザ
+      - name: google-chrome
+      - name: firefox
+      - name: arc
+      # エディタ
+      - name: cursor
+      # ターミナル (シェルはzshのまま使う)
+      - name: warp
+      # 開発ツール
+      - name: docker
+      - name: sequel-ace
+      # コミュニケーション
+      - name: zoom
+      - name: slack
+      # メモ
+      - name: notion
+      # 電子書籍
+      - name: honto
+      # マルチディスプレイ
+      - name: displaylink
+    apps:
+      - { name: "LINE", id: "539883307"}
+      # focus to doは後で入れること
+
+  tasks:
+    - name: setup homebrew
+      ignore_errors: yes
+      block:
+        - name: homebrew update
+          homebrew:
+            update_homebrew: yes
+        - name: homebrew tap
+          homebrew_tap:
+            name: '{{ item }}'
+            state: present
+          with_items: '{{ homebrew_taps }}'
+        - name: homebrew package install
+          homebrew:
+            name: '{{ item.name }}'
+            state: '{{ item.state | default("present") }}'
+          with_items: '{{ homebrew_packages }}'
+
+    - name: install from AppStore
+      ignore_errors: yes
+      block:
+        - name: brew install mas
+          homebrew:
+            name: mas
+            state: present
+        - name: fetch list
+          command: mas list
+          register: installed_list
+          check_mode: no
+          changed_when: no
+        - name: install from AppStore
+          conmmand: "mas install {{ item.id }}"
+          when: "installed_list.stdout_lines | select('search', item.id) | list | length == 0"
+          loop: "{{ apps }}"
+
+    - name: homebrew cack package install
+      ignore_errors: yes
+      community.general.homebrew_cask: name={{ item.name }} state=installed
+      environment:
+        HOMEBREW_CASK_OPTS: "--appdir=/Applications"
+      with_items: '{{ homebrew_cask_package }}'
+
+    - name: setup anyenv
+      block:
+        - name: anyenv setting
+          file:
+            path: '{{ ansible_env.HOME }}/.anyenv/plugins'
+            state: directory
+        - name: anyenv_update clone
+          ansible.builtin.git:
+            repo: https://github.com/znz/anyenv-update.git
+            dest: '{{ ansible_env.HOME }}/.anyenv/plugins/anyenv-update'
