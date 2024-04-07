@@ -34,7 +34,7 @@
       - name: google-japanese-ime
     apps:
       - { name: "LINE", id: "539883307"}
-      # focus to doは後で入れること
+      - { name: "Focus To-Do", id: "1258530160"}
 
   tasks:
     - name: setup homebrew
