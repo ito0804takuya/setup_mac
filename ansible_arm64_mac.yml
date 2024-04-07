@@ -101,6 +101,8 @@
         - { key: magnification, type: bool, value: true }
         # 拡大時のサイズ
         - { key: largesize, type: integer, value: 64 }
+        # 通常時のサイズ
+        - { key: tilesize, type: integer, value: 32 }
 
   handlers:
     - name: restart_dock
