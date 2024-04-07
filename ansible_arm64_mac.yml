@@ -90,11 +90,11 @@
             dest: '{{ ansible_env.HOME }}/.anyenv/plugins/anyenv-update'
 
     - name: setup mac dock
-      osx_defaults: >
+      osx_defaults:
         domain: com.apple.dock
-        key={{ item.key }}
-        type={{ item.type }}
-        value={{ item.value }}
+        key: '{{ item.key }}'
+        type: '{{ item.type }}'
+        value: '{{ item.value }}'
       notify: restart_dock
       with_items:
         # hover時に拡大する
