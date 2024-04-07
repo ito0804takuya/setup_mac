@@ -88,3 +88,21 @@
           ansible.builtin.git:
             repo: https://github.com/znz/anyenv-update.git
             dest: '{{ ansible_env.HOME }}/.anyenv/plugins/anyenv-update'
+
+    - name: setup mac dock
+      osx_defaults: >
+        domain: com.apple.dock
+        key={{ item.key }}
+        type={{ item.type }}
+        value={{ item.value }}
+      notify: restart_dock
+      with_items:
+        # hover時に拡大する
+        - { key: magnification, type: bool, value: true }
+        # 拡大時のサイズ
+        - { key: largesize, type: integer, value: 64 }
+
+  handlers:
+    - name: restart_dock
+      become: yes
+      command: killall Dock
