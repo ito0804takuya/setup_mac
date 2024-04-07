@@ -57,13 +57,13 @@ fi
 
 
 echo -e "-----\nAnsible Deploy"
-cd ~
-curl -O -sfSL https://raw.githubusercontent.com/shinyaoguri/setup/main/ansible_arm64_mac.yml
+# cd ~
+# curl -O -sfSL https://raw.githubusercontent.com/shinyaoguri/setup/main/ansible_arm64_mac.yml
 
-if [ -f ~/ansible_arm64_mac.yml ]; then
+if [ -f ./ansible_arm64_mac.yml ]; then
   ansible-galaxy collection install community.general
   ansible-playbook ansible_arm64_mac.yml --ask-become-pass
-  rm ansible_arm64_mac.yml
+  # rm ansible_arm64_mac.yml
 else
   echo -e "🙅 ansible-playbook was not downloaded"
 fi
