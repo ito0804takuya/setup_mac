@@ -18,6 +18,7 @@
       - name: cursor
       # ターミナル (シェルはzshのまま使う)
       - name: warp
+      - name: iterm2
       # 開発ツール
       - name: docker
       - name: sequel-ace
