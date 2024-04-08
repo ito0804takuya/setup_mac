@@ -123,31 +123,6 @@
         # タブバーを表示
         - { key: ShowTabView, type: bool, value: true }
 
-    - name: setup mac menu bar
-      osx_defaults:
-        domain={{ item.domain }}
-        key={{ item.key }}
-        type={{ item.type }}
-        value={{ item.value }}
-      notify: restart_menu_bar
-      with_items:
-        # メニューバーのバッテリー表示部分で「%」表示をするかどうか
-        - { domain: com.apple.menuextra.battery, key: ShowPercent, type: string, value: "YES" }
-
-        # メニューバーの時計の表示フォーマット
-        - { domain: com.apple.menuextra.clock, key: DateFormat, type: string, value: "M\\U6708d\\U65e5(EEE)HH\\:mm\\:ss" }
-    
-    # その他
-    - name: setup mac other
-      osx_defaults:
-        domain={{ item.domain }}
-        key={{ item.key }}
-        type={{ item.type }}
-        value={{ item.value }}
-      with_items:
-        # カーソルの移動を速く
-        - { domain: com.apple.mouse.scaling, key: NSGlobalDomain, type: float, value: 2.5 }
-
   handlers:
     - name: restart_dock
       become: yes
@@ -155,6 +130,3 @@
     - name: restart_finder
       become: yes
       command: killall Finder
-    - name: restart_menu_bar
-      become: yes
-      command: killall -KILL SystemUIServer
