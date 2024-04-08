@@ -13,6 +13,9 @@ https://support.apple.com/ja-jp/guide/mac-help/mchlp1011/mac
 - CapsLock を Control へ。
 - Control を Command へ。
 
+# Cursorの設定
+- Auto Save: afterDelay
+
 # 参考
 https://zenn.dev/shinyaoguri/articles/5caeeeea21b0c2
 
