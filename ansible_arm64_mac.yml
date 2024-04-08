@@ -123,6 +123,34 @@
         - { key: ShowStatusBar, type: bool, value: true }
         # タブバーを表示
         - { key: ShowTabView, type: bool, value: true }
+    
+    - name: setup cursor editer
+      command: cursor --install-extension {{ item.name }}
+      with_items:
+        # 日本語化
+        - { name: "MS-CEINTL.vscode-language-pack-ja" }
+        # 補完, 整形
+        - { name: "esbenp.prettier-vscode" }
+        - { name: "streetsidesoftware.code-spell-checker" }
+        - { name: "christian-kohler.path-intellisense" }
+        # Git
+        - { name: "eamodio.gitlens" }
+        - { name: "donjayamanne.githistory" }
+        # 見た目で分かりやすく
+        - { name: "oderwat.indent-rainbow" }
+        - { name: "PKief.material-icon-theme" }
+        - { name: "GitHub.github-vscode-theme" }
+        - { name: "mikestead.dotenv" }
+        - { name: "usernamehw.errorlens" }
+        # DevContainer
+        - { name: "ms-vscode-remote.remote-containers" }
+        # Go
+        - { name: "golang.Go" }
+        # Terraform
+        - { name: "hashicorp.terraform" }
+        # React用のツール一式
+        - { name: "dsznajder.es7-react-js-snippets" }
+        - { name: "dbaeumer.vscode-eslint" }
 
   handlers:
     - name: restart_dock
