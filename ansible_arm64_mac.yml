@@ -32,6 +32,8 @@
       - name: displaylink
       # 日本語入力
       - name: google-japanese-ime
+      # コピペ履歴
+      - name: clipy
     apps:
       - { name: "LINE", id: "539883307"}
       - { name: "Focus To-Do", id: "1258530160"}
@@ -104,7 +106,55 @@
         # 通常時のサイズ
         - { key: tilesize, type: float, value: 48 }
 
+    - name: setup mac finder
+      osx_defaults:
+        domain: com.apple.finder
+        key: '{{ item.key }}'
+        type: '{{ item.type }}'
+        value: '{{ item.value }}'
+      notify: restart_finder
+      with_items:
+        # 隠しファイルも表示
+        - { key: AppleShowAllFiles, type: bool, value: true }
+        # パス表示
+        - { key: ShowPathbar, type: bool, value: true }
+        # Finderの下の方に「40項目、183.13GB空き」みたいな表示をだすかどうか
+        - { key: ShowStatusBar, type: bool, value: true }
+        # タブバーを表示
+        - { key: ShowTabView, type: bool, value: true }
+
+    - name: setup mac menu bar
+      osx_defaults:
+        domain={{ item.domain }}
+        key={{ item.key }}
+        type={{ item.type }}
+        value={{ item.value }}
+      notify: restart_menu_bar
+      with_items:
+        # メニューバーのバッテリー表示部分で「%」表示をするかどうか
+        - { domain: com.apple.menuextra.battery, key: ShowPercent, type: string, value: "YES" }
+
+        # メニューバーの時計の表示フォーマット
+        - { domain: com.apple.menuextra.clock, key: DateFormat, type: string, value: "M\\U6708d\\U65e5(EEE)HH\\:mm\\:ss" }
+    
+    # その他
+    - name: setup mac other
+      osx_defaults:
+        domain={{ item.domain }}
+        key={{ item.key }}
+        type={{ item.type }}
+        value={{ item.value }}
+      with_items:
+        # カーソルの移動を速く
+        - { domain: com.apple.mouse.scaling, key: NSGlobalDomain, type: float, value: 2.5 }
+
   handlers:
     - name: restart_dock
       become: yes
       command: killall Dock
+    - name: restart_finder
+      become: yes
+      command: killall Finder
+    - name: restart_menu_bar
+      become: yes
+      command: killall -KILL SystemUIServer
