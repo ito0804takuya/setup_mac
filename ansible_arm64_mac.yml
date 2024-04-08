@@ -100,9 +100,9 @@
         # hover時に拡大する
         - { key: magnification, type: bool, value: true }
         # 拡大時のサイズ
-        - { key: largesize, type: integer, value: 64 }
+        - { key: largesize, type: integer, value: 72 }
         # 通常時のサイズ
-        - { key: tilesize, type: float, value: 42 }
+        - { key: tilesize, type: float, value: 48 }
 
   handlers:
     - name: restart_dock
