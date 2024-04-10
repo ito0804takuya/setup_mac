@@ -139,7 +139,8 @@
         # 見た目で分かりやすく
         - { name: "oderwat.indent-rainbow" }
         - { name: "PKief.material-icon-theme" }
-        - { name: "GitHub.github-vscode-theme" }
+        # - { name: "GitHub.github-vscode-theme" }
+        # → 他の配色テーマも探してみたが、結局、monokaiが一番良かったので消す
         - { name: "mikestead.dotenv" }
         - { name: "usernamehw.errorlens" }
         # DevContainer
