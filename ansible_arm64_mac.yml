@@ -143,8 +143,10 @@
         # → 他の配色テーマも探してみたが、結局、monokaiが一番良かったので消す
         - { name: "mikestead.dotenv" }
         - { name: "usernamehw.errorlens" }
+        # Docker
+        - { name: "ms-azuretools.vscode-docker" }
         # DevContainer
-        # NOTE: エラー発生したためｍ、仕方なく手動でインストールした
+        # NOTE: エラー発生したため、仕方なく手動でインストールした
         # - { name: "ms-vscode-remote.remote-containers" }
         # Go
         - { name: "golang.Go" }
@@ -153,6 +155,8 @@
         # React用のツール一式
         - { name: "dsznajder.es7-react-js-snippets" }
         - { name: "dbaeumer.vscode-eslint" }
+        # REST叩くクライアント
+        - { name: "rangav.vscode-thunder-client" }
 
   handlers:
     - name: restart_dock
